@@ -51,3 +51,13 @@ post_id = params[:post_id]
  @row = @results[0]
 erb :details
 end
+
+post'/details/:post_id' do
+	post_id = params[:post_id]
+	content = params[:content]
+	if content.length <= 0 
+   	@error = 'Type post text'
+   	return erb :details/:post_id
+   end
+  erb"You typed comment #{content} for post #{post_id}"
+	end

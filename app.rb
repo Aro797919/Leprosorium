@@ -39,5 +39,10 @@ get'/' do
    #сохранение данных в БД
  @db.execute 'insert into Posts (created_date, content) values ( datetime(), ? )', [content]
 redirect to('/')
-erb "You typed  #{content}"
+
  end
+
+ get'/details/:post_id' do
+post_id = params[:post_id]
+erb"Displaying results information for whit id #{post_id}"
+end

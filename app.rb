@@ -16,6 +16,7 @@ end
 configure do               #пишется для того,чтобы каждый раз таблица не пересоздавалось
 init_db
 @db.execute 'CREATE TABLE  IF NOT EXISTS Posts (id integer PRIMARY KEY AUTOINCREMENT,created_date date,content text)'
+@db.execute 'CREATE TABLE  IF NOT EXISTS Comments (id integer PRIMARY KEY AUTOINCREMENT,created_date date,content text,post_id integer)'
 	end
 
 get'/' do 

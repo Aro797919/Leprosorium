@@ -11,6 +11,13 @@ end
 before do
 	init_db
 end
+
+#добавление таблиц
+configure do               #пишется для того,чтобы каждый раз таблица не пересоздавалось
+init_db
+@db.execute 'CREATE TABLE  IF NOT EXISTS Posts (id integer PRIMARY KEY AUTOINCREMENT,created_date date,content text)'
+	end
+
 get'/' do 
  erb"Hello Aro"
 	end

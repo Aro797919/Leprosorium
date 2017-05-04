@@ -50,6 +50,8 @@ post_id = params[:post_id]
  @results = @db.execute'select * from Posts where id = ?',[post_id]
  #выбираем этот один пост в переменную @row
  @row = @results[0]
+ #выбираем  комментарий для поста
+ @comments = @db.execute 'select * from Comments where post_id = ? order by id',[post_id]
 erb :details
 end
 
@@ -62,5 +64,5 @@ post'/details/:post_id' do
    end
    @db.execute 'insert into Comments (created_date, content,post_id) values ( datetime(), ?, ? )', [content, post_id]
    redirect to('/details/' + post_id)
-  erb"You typed comment #{content} for post #{post_id}"
+  
 	end

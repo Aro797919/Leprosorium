@@ -19,7 +19,7 @@ init_db
 	end
 
 get'/' do 
- erb"Hello Aro"
+ erb :index
 	end
  
  get'/new' do
@@ -33,4 +33,8 @@ get'/' do
    	return erb :new
    end
    erb "You typed  #{content}"
+
+   #сохранение данных в БД
+ @db.execute 'insert into Posts (created_date, content) values ( datetime(), ? )', [content]
+
  end

@@ -6,3 +6,6 @@ get'/' do
  erb"Hello Aro"
 	
 end
+ get'/new' do
+ 	erb "Hello"
+ end

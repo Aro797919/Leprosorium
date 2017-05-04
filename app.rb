@@ -29,13 +29,15 @@ get'/' do
 
  post'/new' do
   content = params[:content] 
+    
    if content.length <= 0 
    	@error = 'Type post text'
    	return erb :new
    end
-   erb "You typed  #{content}"
+  
 
    #сохранение данных в БД
  @db.execute 'insert into Posts (created_date, content) values ( datetime(), ? )', [content]
-
+redirect to('/')
+erb "You typed  #{content}"
  end

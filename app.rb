@@ -15,7 +15,7 @@ end
 #добавление таблиц
 configure do               #пишется для того,чтобы каждый раз таблица не пересоздавалось
 init_db
-@db.execute 'CREATE TABLE  IF NOT EXISTS Posts (id integer PRIMARY KEY AUTOINCREMENT,created_date date,content text)'
+@db.execute 'CREATE TABLE  IF NOT EXISTS Posts (id integer PRIMARY KEY AUTOINCREMENT,created_date date,content text,author text)'
 @db.execute 'CREATE TABLE  IF NOT EXISTS Comments (id integer PRIMARY KEY AUTOINCREMENT,created_date date,content text,post_id integer)'
 	end
 
@@ -30,7 +30,7 @@ get'/' do
 
  post'/new' do
   content = params[:content] 
-    
+   author = params[:author] 
    if content.length <= 0 
    	@error = 'Type post text'
    	return erb :new
@@ -38,7 +38,7 @@ get'/' do
   
 
    #сохранение данных в БД
- @db.execute 'insert into Posts (created_date, content) values ( datetime(), ? )', [content]
+ @db.execute 'insert into Posts (created_date, content, author) values ( datetime(), ?, ? )', [content,author]
 redirect to('/')
 
  end

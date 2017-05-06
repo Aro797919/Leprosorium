@@ -1,6 +1,6 @@
 <h3>Latest posts</h3><br>
 <% @results.each do |post| %>
-	<span style="font-family: inherit; color: green"> <%= post['author'] %></span>
+	<span style="font-family: inherit; color: blue"> <%= post['author'] %></span>
 	<p> <%= post['content'] %></p><br>
 	 Added at <%= post['created_date']%><br>
 	  <a href="/details/<%= post['id'] %>">Comments </a>

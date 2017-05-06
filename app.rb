@@ -19,7 +19,7 @@ init_db
 @db.execute 'CREATE TABLE  IF NOT EXISTS Comments (id integer PRIMARY KEY AUTOINCREMENT,created_date date,content text,post_id integer)'
 	end
 
-get'/' do 
+get'/posts' do 
  @results = @db.execute'select * from Posts order by id desc'
  erb :index
 	end
@@ -58,11 +58,13 @@ end
 post'/details/:post_id' do
 	post_id = params[:post_id]
 	content = params[:content]
-	if content.length <= 0 
-   	@error = 'Type post text'
-   	return erb :details/:post_id
-   end
+	if content.length <= 0
+		@error ="Type comments text"
+		return erb :new
+     
+	end
+	
    @db.execute 'insert into Comments (created_date, content,post_id) values ( datetime(), ?, ? )', [content, post_id]
-   redirect to('/details/' + post_id)
+  redirect to('/details/' + post_id)
   
 	end
